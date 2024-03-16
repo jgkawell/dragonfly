@@ -1,6 +1,7 @@
 import argparse
 import os
 import ssl
+import json
 
 import paho.mqtt.client as mqtt
 
@@ -11,14 +12,16 @@ def on_message(client, userdata, msg):
     print(f"Recieved message {str(msg.payload)} on topic {msg.topic}")
     match msg.topic.split('/')[-1]:
         case 'play':
-            play(msg.payload.decode('utf-8'))
+            play(msg.payload)
         case 'volume':
             volume(msg.payload.decode('utf-8'))
         case _:
             print('Unknown command')
 
-def play(file):
-    os.system(f"aplay {file}")
+def play(message):
+    msg = json.loads(message)
+    volume(msg['volume'])
+    os.system(f"paplay {msg['file']}")
 
 def volume(volume):
     os.system(f"amixer sset Master {volume}%")
