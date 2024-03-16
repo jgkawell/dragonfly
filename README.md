@@ -10,7 +10,7 @@ mqtt:
         unique_id: 6720f97a-91b9-4e9e-9fb5-9a0c0fd22a30
         name: "Play sound"
         command_topic: "dragonfly/test/play"
-        payload_press: "audio/sound.wav"
+        payload_press: '{"file":"audio/door-chime.wav","volume":"50"}'
 ```
 
 Obviously you need to be running the Mosquitto MQTT broker in Home Assistant as well as have the audio file available on the computer running dragonfly.
