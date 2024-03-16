@@ -13,11 +13,16 @@ def on_message(client, userdata, msg):
     match msg.topic.split('/')[-1]:
         case 'play':
             play(msg.payload.decode('utf-8'))
+        case 'volume':
+            volume(msg.payload.decode('utf-8'))
         case _:
             print('Unknown command')
 
 def play(file):
     os.system(f"aplay {file}")
+
+def volume(volume):
+    os.system(f"amixer sset Master {volume}%")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-N', '--name', required=True)
