@@ -1,7 +1,8 @@
-import paho.mqtt.client as mqtt
-import ssl
-import os
 import argparse
+import os
+import ssl
+
+import paho.mqtt.client as mqtt
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected with result code {reason_code}")
@@ -16,7 +17,7 @@ def on_message(client, userdata, msg):
             print('Unknown command')
 
 def play(file):
-    os.system(f"paplay {file}")
+    os.system(f"aplay {file}")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-N', '--name', required=True)

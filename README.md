@@ -16,3 +16,35 @@ mqtt:
 Obviously you need to be running the Mosquitto MQTT broker in Home Assistant as well as have the audio file available on the computer running dragonfly.
 
 More to come...
+
+## Installation
+
+First, clone the repo and set up the dependencies:
+
+```bash
+git clone https://github.com/jgkawell/dragonfly.git
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install paho-mqtt
+```
+
+Then, you can run the program with:
+
+```bash
+./script/run YOUR_OPTIONS
+```
+
+Additionally, you can install the program as a service. First open up the `dragonfly.service` file and modify the options to suit your needs. Then copy the file to the systemd directory and enable the service:
+
+```bash
+sudo cp dragonfly.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable dragonfly
+sudo systemctl start dragonfly
+```
+
+And you can check on the status of the service with:
+
+```bash
+sudo systemctl status dragonfly
+```
