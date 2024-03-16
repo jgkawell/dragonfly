@@ -6,7 +6,6 @@ import paho.mqtt.client as mqtt
 
 def on_connect(client, userdata, flags, reason_code, properties):
     print(f"Connected with result code {reason_code}")
-    client.subscribe(f'dragonfly/{args.name}/#')
 
 def on_message(client, userdata, msg):
     print(f"Recieved message {str(msg.payload)} on topic {msg.topic}")
@@ -41,6 +40,7 @@ if args.port == 8883:
     mqttc.tls_set(ca_certs=None, certfile=None, keyfile=None, cert_reqs=None, tls_version=ssl.PROTOCOL_TLSv1_2)
 
 mqttc.connect(args.host, args.port, 60)
+mqttc.subscribe(f'dragonfly/{args.name}/#', 2)
 
 # Blocking call that processes network traffic, dispatches callbacks and handles reconnecting
 mqttc.loop_forever()
