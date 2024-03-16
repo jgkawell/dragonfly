@@ -21,7 +21,7 @@ def on_message(client, userdata, msg):
 def play(message):
     msg = json.loads(message)
     volume(msg['volume'])
-    os.system(f"paplay {msg['file']}")
+    os.system(f"aplay {msg['file']}")
 
 def volume(volume):
     os.system(f"amixer sset Master {volume}%")
